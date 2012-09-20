@@ -36,7 +36,7 @@ class Hibernate4GriffonAddon {
         }
     }
 
-    def events = [
+    Map events = [
         ShutdownStart: { app ->
             Hibernate4Connector.instance.disconnect(app)
         }

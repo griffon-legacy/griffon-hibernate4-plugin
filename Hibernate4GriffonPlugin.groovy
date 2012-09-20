@@ -18,11 +18,11 @@
  */
 class Hibernate4GriffonPlugin {
     // the plugin version
-    String version = '0.1'
+    String version = '0.2'
     // the version or versions of Griffon the plugin is designed for
-    String griffonVersion = '0.9.5 > *'
+    String griffonVersion = '1.1.0 > *'
     // the other plugins this plugin depends on
-    Map dependsOn = [datasource: '0.3']
+    Map dependsOn = [datasource: '0.4']
     // resources that are included in plugin packaging
     List pluginIncludes = []
     // the plugin license
@@ -64,6 +64,7 @@ giving you access to a `org.hibernate.Session` object, with which you'll be able
 to make calls to the database. Remember to make all database calls off the EDT
 otherwise your application may appear unresponsive when doing long computations
 inside the EDT.
+
 This method is aware of multiple databases. If no databaseName is specified when calling
 it then the default database will be selected. Here are two example usages, the first
 queries against the default database while the second queries a database whose name has
@@ -76,10 +77,10 @@ been configured as 'internal'
             withHibernate4('internal') { databaseName, session -> ... }
         }
     }
-    
+
 This method is also accessible to any component through the singleton `griffon.plugins.hibernate4.Hibernate4Connector`.
 You can inject these methods to non-artifacts via metaclasses. Simply grab hold of a particular metaclass and call
-`Hhibernate4Enhancer.enhance(metaClassInstance, hibernateProviderInstance)`.
+`Hibernate4Enhancer.enhance(metaClassInstance, hibernateProviderInstance)`.
 
 Configuration
 -------------
@@ -134,19 +135,19 @@ for this kind of tests. However you can use `Hhibernate4Enhancer.enhance(metaCla
 
     public interface Hibernate4Provider {
         Object withHibernate4(Closure closure);
-        Object withHibernate4(String clientName, Closure closure);
+        Object withHibernate4(String databaseNamee, Closure closure);
         <T> T withHibernate4(CallableWithArgs<T> callable);
-        <T> T withHibernate4(String clientName, CallableWithArgs<T> callable);
+        <T> T withHibernate4(String databaseNamee, CallableWithArgs<T> callable);
     }
 
 It's up to you define how these methods need to be implemented for your tests. For example, here's an implementation that never
 fails regardless of the arguments it receives
 
     class MyHibernate4Provider implements Hibernate4Provider {
-        Object withHibernate4(String clientName = 'default', Closure closure) { null }
-        public <T> T withHibernate4(String clientName = 'default', CallableWithArgs<T> callable) { null }      
+        Object withHibernate4(String databaseNamee = 'default', Closure closure) { null }
+        public <T> T withHibernate4(String databaseNamee = 'default', CallableWithArgs<T> callable) { null }
     }
-    
+
 This implementation may be used in the following way
 
     class MyServiceTests extends GriffonUnitTestCase {

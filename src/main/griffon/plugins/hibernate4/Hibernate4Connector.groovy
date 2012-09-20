@@ -22,6 +22,7 @@ import griffon.plugins.hibernate4.internal.HibernateConfigurationHelper
 import org.hibernate.SessionFactory
 import org.hibernate.cfg.Configuration
 import griffon.util.CallableWithArgs
+import griffon.util.ConfigUtils
 import griffon.core.GriffonApplication
 
 import javax.sql.DataSource
@@ -44,8 +45,7 @@ final class Hibernate4Connector implements Hibernate4Provider {
     // ======================================================
 
     ConfigObject createConfig(GriffonApplication app) {
-        def configClass = app.class.classLoader.loadClass('Hibernate4Config')
-        new ConfigSlurper(griffon.util.Environment.current.name).parse(configClass)
+        ConfigUtils.loadConfigWithI18n('Hibernate4Config')
     }
 
     private ConfigObject narrowConfig(ConfigObject config, String dataSourceName) {

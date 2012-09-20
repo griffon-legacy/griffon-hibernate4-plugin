@@ -7,7 +7,7 @@ griffon.project.dependency.resolution = {
         mavenRepo 'http://repository.jboss.org/nexus/content/groups/public'
     }
     dependencies {
-        String hbmVersion = '4.1.3.Final'
+        String hbmVersion = '4.1.7.Final'
         compile("org.hibernate:hibernate-core:$hbmVersion",
                 "org.hibernate:hibernate-entitymanager:$hbmVersion") {
             excludes 'ant'
