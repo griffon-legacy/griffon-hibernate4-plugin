@@ -39,7 +39,7 @@ import static org.codehaus.groovy.runtime.DefaultGroovyMethods.eachLine;
 
 /**
  * Sets up a shared Hibernate SessionFactory.
- * Based on Spring's {@code org.springframework.orm.hibernate3.LocalSessionFactoryBean}
+ * Based on Spring's {@code org.springframework.orm.hibernate4.LocalSessionFactoryBean}
  * Original author: Juergen Hoeller (Spring 1.2)
  *
  * @author Andres Almiray

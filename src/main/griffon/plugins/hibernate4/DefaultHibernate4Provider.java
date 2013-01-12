@@ -16,18 +16,25 @@
 
 package griffon.plugins.hibernate4;
 
-import griffon.util.CallableWithArgs;
-import groovy.lang.Closure;
+
+import org.hibernate.SessionFactory;
 
 /**
  * @author Andres Almiray
  */
-public interface Hibernate4Provider {
-    <R> R withHibernate4(Closure<R> closure);
+public class DefaultHibernate4Provider extends AbstractHibernate4Provider {
+    private static final DefaultHibernate4Provider INSTANCE;
 
-    <R> R withHibernate4(String sessionFactoryName, Closure<R> closure);
+    static {
+        INSTANCE = new DefaultHibernate4Provider();
+    }
 
-    <R> R withHibernate4(CallableWithArgs<R> callable);
+    public static DefaultHibernate4Provider getInstance() {
+        return INSTANCE;
+    }
 
-    <R> R withHibernate4(String sessionFactoryName, CallableWithArgs<R> callable);
+    @Override
+    protected SessionFactory getSessionFactory(String sessionFactoryName) {
+        return Hibernate4Holder.getInstance().fetchSessionFactory(sessionFactoryName);
+    }
 }

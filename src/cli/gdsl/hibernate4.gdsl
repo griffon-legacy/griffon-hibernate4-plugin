@@ -14,20 +14,12 @@
  * limitations under the License.
  */
 
-package griffon.plugins.hibernate4;
-
-import griffon.util.CallableWithArgs;
-import groovy.lang.Closure;
+package gdsl
 
 /**
  * @author Andres Almiray
  */
-public interface Hibernate4Provider {
-    <R> R withHibernate4(Closure<R> closure);
 
-    <R> R withHibernate4(String sessionFactoryName, Closure<R> closure);
-
-    <R> R withHibernate4(CallableWithArgs<R> callable);
-
-    <R> R withHibernate4(String sessionFactoryName, CallableWithArgs<R> callable);
+contributor(scope: annotatedScope(ctype: 'griffon.plugins.hibernate4.Hibernate4Aware')) {
+    delegatesTo(findClass('griffon.plugins.hibernate4.Hibernate4ContributionHandler'))
 }
