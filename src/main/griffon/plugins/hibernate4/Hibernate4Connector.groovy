@@ -35,7 +35,10 @@ final class Hibernate4Connector {
     private bootstrap
 
     ConfigObject createConfig(GriffonApplication app) {
-        ConfigUtils.loadConfigWithI18n('Hibernate4Config')
+        if (!app.config.pluginConfig.hibernate4) {
+            app.config.pluginConfig.hibernate4 = ConfigUtils.loadConfigWithI18n('Hibernate4Config')
+        }
+        app.config.pluginConfig.hibernate4
     }
 
     private ConfigObject narrowConfig(ConfigObject config, String dataSourceName) {
