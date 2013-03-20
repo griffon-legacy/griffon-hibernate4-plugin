@@ -61,7 +61,7 @@ final class Hibernate4Connector {
         ConfigObject config = narrowConfig(createConfig(app), dataSourceName)
         app.event('Hibernate4ConnectStart', [config, dataSourceName])
         Configuration configuration = createConfiguration(app, config, dsConfig, dataSourceName)
-        createSchema(dsConfig.dbCreate ?: 'create-drop', configuration)
+        createSchema(dsConfig, dataSourceName, configuration)
         SessionFactory sessionFactory = configuration.buildSessionFactory()
         Hibernate4Holder.instance.setSessionFactory(dataSourceName, sessionFactory)
         bootstrap = app.class.classLoader.loadClass('BootstrapHibernate4').newInstance()
@@ -108,7 +108,13 @@ final class Hibernate4Connector {
         configuration
     }
 
-    private void createSchema(String dbCreate, Configuration configuration) {
+    private void createSchema(ConfigObject config, String dataSourceName, Configuration configuration) {
+        String dbCreate = 'create-drop'
+        if (dataSourceName == DEFAULT) {
+            dbCreate = config.dataSource.dbCreate ?: dbCreate
+        } else {
+            dbCreate = config.dataSources[dataSourceName].dbCreate ?: dbCreate
+        }
         if (dbCreate == 'skip') dbCreate = 'validate'
         configuration.setProperty('hibernate.hbm2ddl.auto', dbCreate)
     }

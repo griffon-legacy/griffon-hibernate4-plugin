@@ -18,7 +18,7 @@
  */
 class Hibernate4GriffonPlugin {
     // the plugin version
-    String version = '1.0.1'
+    String version = '1.0.2'
     // the version or versions of Griffon the plugin is designed for
     String griffonVersion = '1.2.0 > *'
     // the other plugins this plugin depends on
