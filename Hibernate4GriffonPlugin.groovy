@@ -18,7 +18,7 @@
  */
 class Hibernate4GriffonPlugin {
     // the plugin version
-    String version = '1.0.2'
+    String version = '1.1.0'
     // the version or versions of Griffon the plugin is designed for
     String griffonVersion = '1.2.0 > *'
     // the other plugins this plugin depends on
@@ -128,6 +128,7 @@ The following events will be triggered by this addon
 
  * Hibernate4ConnectStart[config, dataSourceName] - triggered before connecting to the database
  * Hibernate4ConfigurationAvailable[configuration, dataSourceName, dataSourceConfig, hibernateConfig] - triggered before opening the SessionFactory
+ * Hibernate4SessionFactoryCreated[config, dataSourceName, sesstionFactory] - triggered after the SessionFactory was created
  * Hibernate4ConnectEnd[dataSourceName, sessionFactory] - triggered after connecting to the database
  * Hibernate4DisconnectStart[config, dataSourceName, sessionFactory] - triggered before disconnecting from the database
  * Hibernate4DisconnectEnd[config, dataSourceName] - triggered after disconnecting from the database

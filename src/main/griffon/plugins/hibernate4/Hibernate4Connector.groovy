@@ -64,6 +64,7 @@ final class Hibernate4Connector {
         createSchema(dsConfig, dataSourceName, configuration)
         SessionFactory sessionFactory = configuration.buildSessionFactory()
         Hibernate4Holder.instance.setSessionFactory(dataSourceName, sessionFactory)
+        app.event('Hibernate4SessionFactoryCreated', [config, dataSourceName, sessionFactory])
         bootstrap = app.class.classLoader.loadClass('BootstrapHibernate4').newInstance()
         bootstrap.metaClass.app = app
         resolveHibernate4Provider(app).withHibernate4(dataSourceName) { dsName, session -> bootstrap.init(dsName, session) }
