@@ -7,7 +7,7 @@
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by getApplication()licable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -22,7 +22,7 @@ includeTargets << griffonScript('_GriffonCreateArtifacts')
 argsMap = argsMap ?: [:]
 argsMap.skipPackagePrompt = true
 
-if(!new File("${basedir}/griffon-app/conf/Hibernate4Config.groovy").exists()) {
+if (!new File("${basedir}/griffon-app/conf/Hibernate4Config.groovy").exists()) {
    createArtifact(
       name: "Hibernate4Config",
       suffix: "",
@@ -30,7 +30,7 @@ if(!new File("${basedir}/griffon-app/conf/Hibernate4Config.groovy").exists()) {
       path: "griffon-app/conf")
 }
 
-if(!new File("${basedir}/griffon-app/conf/BootstrapHibernate4.groovy").exists()) {
+if (!new File("${basedir}/griffon-app/conf/BootstrapHibernate4.groovy").exists()) {
    createArtifact(
       name: "BootstrapHibernate4",
       suffix: "",

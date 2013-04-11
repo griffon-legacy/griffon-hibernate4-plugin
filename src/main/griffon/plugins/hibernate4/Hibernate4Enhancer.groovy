@@ -30,7 +30,7 @@ final class Hibernate4Enhancer {
     private Hibernate4Enhancer() {}
     
     static void enhance(MetaClass mc, Hibernate4Provider provider = DefaultHibernate4Provider.instance) {
-        if(LOG.debugEnabled) LOG.debug("Enhancing $mc with $provider")
+        if (LOG.debugEnabled) LOG.debug("Enhancing $mc with $provider")
         mc.withHibernate4 = {Closure closure ->
             provider.withHibernate4(DEFAULT, closure)
         }

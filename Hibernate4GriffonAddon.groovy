@@ -20,12 +20,17 @@ import griffon.plugins.hibernate4.Hibernate4Connector
 import griffon.plugins.hibernate4.Hibernate4Enhancer
 import griffon.plugins.hibernate4.Hibernate4ContributionHandler
 
+import static griffon.util.ConfigUtils.getConfigValueAsBoolean
+
 /**
  * @author Andres Almiray
  */
 class Hibernate4GriffonAddon {
     void addonPostInit(GriffonApplication app) {
-        Hibernate4Connector.instance.connect(app)
+        ConfigObject config = Hibernate4Connector.instance.createConfig(app)
+        if (getConfigValueAsBoolean(app.config, 'griffon.hibernate4.connect.onstartup', true)) {
+            Hibernate4Connector.instance.connect(app, config)
+        }
         def types = app.config.griffon?.hibernate4?.injectInto ?: ['controller']
         for(String type : types) {
             for(GriffonClass gc : app.artifactManager.getClassesOfType(type)) {
