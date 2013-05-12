@@ -33,6 +33,8 @@ public class DefaultHibernate4Provider extends AbstractHibernate4Provider {
         return INSTANCE;
     }
 
+    private DefaultHibernate4Provider() {}
+
     @Override
     protected SessionFactory getSessionFactory(String sessionFactoryName) {
         return Hibernate4Holder.getInstance().fetchSessionFactory(sessionFactoryName);

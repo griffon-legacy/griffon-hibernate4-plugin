@@ -18,11 +18,11 @@
  */
 class Hibernate4GriffonPlugin {
     // the plugin version
-    String version = '1.2.0'
+    String version = '1.3.0'
     // the version or versions of Griffon the plugin is designed for
-    String griffonVersion = '1.2.0 > *'
+    String griffonVersion = '1.3.0 > *'
     // the other plugins this plugin depends on
-    Map dependsOn = [datasource: '1.2.0']
+    Map dependsOn = [datasource: '1.3.0']
     // resources that are included in plugin packaging
     List pluginIncludes = []
     // the plugin license

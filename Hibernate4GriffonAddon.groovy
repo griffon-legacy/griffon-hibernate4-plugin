@@ -27,10 +27,7 @@ import static griffon.util.ConfigUtils.getConfigValueAsBoolean
  */
 class Hibernate4GriffonAddon {
     void addonPostInit(GriffonApplication app) {
-        ConfigObject config = Hibernate4Connector.instance.createConfig(app)
-        if (getConfigValueAsBoolean(app.config, 'griffon.hibernate4.connect.onstartup', true)) {
-            Hibernate4Connector.instance.connect(app, config)
-        }
+        Hibernate4Connector.instance.createConfig(app)
         def types = app.config.griffon?.hibernate4?.injectInto ?: ['controller']
         for(String type : types) {
             for(GriffonClass gc : app.artifactManager.getClassesOfType(type)) {
@@ -41,6 +38,12 @@ class Hibernate4GriffonAddon {
     }
 
     Map events = [
+        LoadAddonsEnd: { app, addons ->
+            if (getConfigValueAsBoolean(app.config, 'griffon.hibernate4.connect.onstartup', true)) {
+                ConfigObject config = Hibernate4Connector.instance.createConfig(app)
+                Hibernate4Connector.instance.connect(app, config)
+            }
+        },
         ShutdownStart: { app ->
             Hibernate4Connector.instance.disconnect(app)
         }

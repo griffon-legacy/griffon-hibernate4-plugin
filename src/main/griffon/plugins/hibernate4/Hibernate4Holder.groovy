@@ -43,6 +43,8 @@ class Hibernate4Holder {
         INSTANCE
     }
 
+    private Hibernate4Holder() {}
+
     String[] getSessionFactoryNames() {
         List<String> sessionFactoryNames = new ArrayList().addAll(sessionFactories.keySet())
         sessionFactoryNames.toArray(new String[sessionFactoryNames.size()])
